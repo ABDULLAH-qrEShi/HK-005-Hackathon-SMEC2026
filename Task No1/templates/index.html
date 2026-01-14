@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Pollution Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 30px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            background-color: #f44336;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .results {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .results h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .pollutant {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        .Good {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .Fair {
+            background-color: #8BC34A;
+            color: white;
+        }
+        .Moderate {
+            background-color: #FFC107;
+            color: #333;
+        }
+        .Poor {
+            background-color: #FF9800;
+            color: white;
+        }
+        .Very.Poor, .VeryPoor {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Air Pollution Result</h1>
+    
+    <div class="form-container">
+        <form method="POST">
+            <input type="text" name="city" placeholder="Enter City" required>
+            <button type="submit">Check</button>
+        </form>
+    </div>
+
+    {% if error %}
+    <div class="error">
+        <strong>Error:</strong> {{ error }}
+    </div>
+    {% endif %}
+
+    {% if result %}
+    <div class="results">
+        <h2>Air Quality for {{ result.city }}</h2>
+        
+        <div class="pollutant {{ result.SO2.replace(' ', '') }}">
+            <span><strong>SO₂ (Sulfur Dioxide):</strong></span>
+            <span>{{ result.SO2 }}</span>
+        </div>
+        
+        <div class="pollutant {{ result.NO2.replace(' ', '') }}">
+            <span><strong>NO₂ (Nitrogen Dioxide):</strong></span>
+            <span>{{ result.NO2 }}</span>
+        </div>
+        
+        <div class="pollutant {{ result.PM10.replace(' ', '') }}">
+            <span><strong>PM10 (Particulate Matter):</strong></span>
+            <span>{{ result.PM10 }}</span>
+        </div>
+        
+        <div class="pollutant {{ result.PM25.replace(' ', '') }}">
+            <span><strong>PM2.5 (Fine Particulate Matter):</strong></span>
+            <span>{{ result.PM25 }}</span>
+        </div>
+        
+        <div class="pollutant {{ result.O3.replace(' ', '') }}">
+            <span><strong>O₃ (Ozone):</strong></span>
+            <span>{{ result.O3 }}</span>
+        </div>
+        
+        <div class="pollutant {{ result.CO.replace(' ', '') }}">
+            <span><strong>CO (Carbon Monoxide):</strong></span>
+            <span>{{ result.CO }}</span>
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>
