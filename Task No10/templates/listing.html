@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List An Item</title>
+    <link rel="stylesheet" href="listing.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 30px 0;
+            color: #2c3e50;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #667eea;
+            padding: 12px 0;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-weight: 600;
+            padding: 8px 12px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #5a67d8;
+            border-radius: 5px;
+        }
+
+        /* Form styling */
+        form {
+            max-width: 500px;
+            margin: 25px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        form label {
+            display: block;
+            margin: 12px 0 5px;
+            font-weight: bold;
+        }
+
+        form input, form textarea, form select, form button {
+            width: 100%;
+            padding: 10px;
+            border: 1.5px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        form textarea {
+            resize: vertical;
+        }
+
+        form button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background-color: #5a67d8;
+        }
+
+        /* Separate buttons for Edit/Delete */
+        .action-forms {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            margin: 15px auto;
+        }
+
+        .action-forms form {
+            width: 48%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('listing') }}">Listing</a>
+            <a href="{{ url_for('market') }}">Market</a>
+            <a href="{{ url_for('review', item_id=1) }}">Reviews</a>
+    </nav>
+
+    <!-- Add Item Form -->
+    <h2>List An Item</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Item Name</label>
+        <input type="text" name="title" required>
+
+        <label>Description</label>
+        <textarea name="description" rows="4" required></textarea>
+
+        <label>Upload Image</label>
+        <input type="file" name="image" required>
+
+        <label>Type</label>
+        <select name="type">
+            <option value="rent">Rent</option>
+            <option value="barter">Barter</option>
+            <option value="both">Both</option>
+        </select>
+
+        <button type="submit">Post Item</button>
+    </form>
+
+    <!-- Edit/Delete Buttons -->
+    <div class="action-forms">
+        <form method="GET" action="/edit_item">
+            <button type="submit">Edit Item</button>
+        </form>
+
+        <form method="POST" action="/delete_item">
+            <button type="submit">Delete Item</button>
+        </form>
+    </div>
+
+</body>
+</html>

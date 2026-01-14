@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Reviews</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='review.css') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2, h3, h4 {
+            text-align: center;
+            margin-top: 30px;
+            color: #2c3e50;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #667eea;
+            padding: 12px 0;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-weight: 600;
+            padding: 8px 12px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #5a67d8;
+            border-radius: 5px;
+        }
+
+        /* Reviews Container */
+        .reviews-container {
+            max-width: 700px;
+            margin: 25px auto;
+        }
+
+        .review {
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .review strong {
+            display: block;
+            font-size: 1rem;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+
+        .review p {
+            font-size: 0.95rem;
+            color: #555;
+            margin: 5px 0 0 0;
+        }
+
+        /* Review Form */
+        .review-form {
+            max-width: 500px;
+            margin: 25px auto 50px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .review-form label {
+            display: block;
+            margin: 12px 0 5px;
+            font-weight: bold;
+        }
+
+        .review-form select,
+        .review-form textarea,
+        .review-form button {
+            width: 100%;
+            padding: 10px;
+            border: 1.5px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .review-form textarea {
+            resize: vertical;
+        }
+
+        .review-form button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .review-form button:hover {
+            background-color: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('listing') }}">Listing</a>
+            <a href="{{ url_for('market') }}">Market</a>
+            <a href="{{ url_for('review', item_id=1) }}">Reviews</a>
+    </nav>
+
+    <h2>User Reviews</h2>
+
+    <!-- Existing Reviews -->
+    <div class="reviews-container">
+        {% for review in reviews %}
+        <div class="review">
+            <strong>{{ review.user }}</strong> {{ review.stars }}
+            <p>{{ review.comment }}</p>
+        </div>
+        {% else %}
+        <p style="text-align:center; color:#666;">No reviews yet.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Add New Review Form -->
+    <h4>Leave a Review</h4>
+    <form method="POST" class="review-form" action="{{ url_for('review', item_id=item_id) }}">
+        <label>Rating</label>
+        <select name="rating" required>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+
+        <label>Comment</label>
+        <textarea name="comment" rows="4" required></textarea>
+
+        <button type="submit">Submit Review</button>
+    </form>
+
+</body>
+</html>

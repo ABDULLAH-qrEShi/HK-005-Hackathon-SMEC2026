@@ -1,0 +1,69 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px 0;
+    color: #333;
+}
+
+/* Navbar */
+.nav-bar {
+    background: #667eea;
+    padding: 12px 0;
+}
+
+.nav-bar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-bar li {
+    margin: 0 15px;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-bar a:hover {
+    color: #ffeb3b;
+}
+
+/* Item Cards */
+.item-card {
+    background: white;
+    width: 300px;
+    margin: 20px;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+}
+
+.item-card img {
+    border-radius: 8px;
+}
+
+.item-card h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.item-card p {
+    font-size: 14px;
+    color: #555;
+}

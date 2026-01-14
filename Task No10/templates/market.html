@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+    <link rel="stylesheet" href="{{ url_for('index') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 30px 0;
+            color: #2c3e50;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #667eea;
+            padding: 12px 0;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-weight: 600;
+            padding: 8px 12px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #5a67d8;
+            border-radius: 5px;
+        }
+
+        /* Items Grid */
+        .items-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 40px 50px;
+        }
+
+        .item-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .item-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .item-card h3 {
+            font-size: 1.3rem;
+            margin: 10px 0;
+            color: #34495e;
+        }
+
+        .item-card p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .item-card ul {
+            list-style: disc;
+            margin: 10px 0 15px 20px;
+            padding: 0;
+            text-align: left;
+        }
+
+        .item-card button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+
+        .item-card button:hover {
+            background-color: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('listing') }}">Listing</a>
+            <a href="{{ url_for('market') }}">Market</a>
+            <a href="{{ url_for('review', item_id=1) }}">Reviews</a>
+    </nav>
+
+    <h2>Marketplace</h2>
+
+    <div class="items-container">
+        <div class="item-card">
+            <img src="{{ url_for('static', filename='upload/camera.jpg') }}" alt="Professional Camera">
+            <h3>Professional Camera</h3>
+            <p>Available for short-term rental.</p>
+
+            <h4>Suggested Matches</h4>
+            <ul>
+                <li>GoPro Camera (Barter)</li>
+                <li>Camera Lens (Rental)</li>
+            </ul>
+
+            <!-- Rent Request Form -->
+            <form method="POST" action="{{ url_for('request_rent') }}">
+                <input type="hidden" name="item_id" value="1">
+                <button type="submit">Request Rent</button>
+            </form>
+
+            <!-- Barter Request Form -->
+            <form method="POST" action="{{ url_for('request_barter') }}">
+                <input type="hidden" name="item_id" value="1">
+                <button type="submit">Request Barter</button>
+            </form>
+        </div>
+
+        <!-- Duplicate item-card div for more items -->
+    </div>
+
+</body>
+</html>
